@@ -6,6 +6,8 @@ import ShowCustomerService from '../../../services/ShowCustomerService';
 import UpdateCustomerService from '../../../services/UpdateCustomerService';
 import CustomersRepository from '../../typeorm/repositories/CustomersRepository';
 
+import { container } from 'tsyringe';
+
 export default class CustomersController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listCustomers = new ListCustomerService();
@@ -28,9 +30,7 @@ export default class CustomersController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, email } = request.body;
 
-    const customersRepository = new CustomersRepository();
-
-    const createCustomer = new CreateCustomerService(customersRepository);
+    const createCustomer = container.resolve(CreateCustomerService);
 
     const customer = await createCustomer.execute({
       name,
