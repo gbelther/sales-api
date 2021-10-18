@@ -1,5 +1,5 @@
-import multer, { StorageEngine } from 'multer';
 import path from 'path';
+import multer, { StorageEngine } from 'multer';
 import crypto from 'crypto';
 
 interface IUploadConfig {
@@ -25,7 +25,7 @@ export default {
   tmpFolder,
   multer: {
     storage: multer.diskStorage({
-      destination: uploadFolder,
+      destination: tmpFolder,
       filename(request, file, callback) {
         const fileHash = crypto.randomBytes(10).toString('hex');
 

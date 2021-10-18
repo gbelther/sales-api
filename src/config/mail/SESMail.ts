@@ -24,7 +24,7 @@ interface ISendMail {
   templateData: IParseMailTemplate;
 }
 
-export default class SESMAIL {
+export default class SESMail {
   static async sendMail({
     to,
     from,
